@@ -19,4 +19,7 @@ public class VoteDTO {
     
     @NotNull(message = "A opção de voto é obrigatória")
     private VoteOption option;
+    
+    @NotBlank(message = "O CPF do associado é obrigatório")
+    private String cpf;
 }
