@@ -1,9 +1,10 @@
 package com.voting.voting_api.cliente;
 
-import lombok.Data;
+import java.util.Random;
+
 import org.springframework.stereotype.Component;
 
-import java.util.Random;
+import lombok.Data;
 
 @Component
 public class ValidacaoCliente{
@@ -15,12 +16,12 @@ public class ValidacaoCliente{
             return null;
         }
 
-        PermissaoVoto permite = 
+        PermissaoVoto permissao = 
         random.nextBoolean() ? 
         PermissaoVoto.VOTO_VALIDO : 
         PermissaoVoto.VOTO_INVALIDO;
         
-        return new ValidacaoCPFResultado(permission);
+        return new ValidacaoCPFResultado(permissao);
     }
 
     //verificacao do cpf
@@ -60,6 +61,10 @@ public class ValidacaoCliente{
     @Data
     public static class ValidacaoCPFResultado {
         private final PermissaoVoto status;
+        
+        public ValidacaoCPFResultado(PermissaoVoto status) {
+        	this.status = status;
+        }
     }
 
 }
