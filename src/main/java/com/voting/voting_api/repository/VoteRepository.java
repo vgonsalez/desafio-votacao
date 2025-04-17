@@ -1,12 +1,11 @@
 package com.voting.voting_api.repository;
 
-import com.voting.voting_api.model.Vote;
-import com.voting.voting_api.model.VoteOption;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-// import java.util.Optional;
+import com.voting.voting_api.model.Vote;
+import com.voting.voting_api.model.VoteOption;
 
 @Repository
 public interface VoteRepository extends JpaRepository<Vote, Long> {
