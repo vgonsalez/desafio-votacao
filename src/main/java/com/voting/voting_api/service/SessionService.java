@@ -1,5 +1,11 @@
 package com.voting.voting_api.service;
 
+import java.time.LocalDateTime;
+
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.voting.voting_api.dto.SessionDTO;
 import com.voting.voting_api.dto.VoteResultDTO;
 import com.voting.voting_api.model.Pauta;
@@ -7,21 +13,17 @@ import com.voting.voting_api.model.Session;
 import com.voting.voting_api.model.VoteOption;
 import com.voting.voting_api.repository.SessionRepository;
 import com.voting.voting_api.repository.VoteRepository;
+
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
 public class SessionService {
     
-    private final SessionRepository sessionRepository;
-    private final VoteRepository voteRepository;
-    private final PautaService pautaService;
+    private final SessionRepository sessionRepository = null;
+    private final VoteRepository voteRepository = null;
+    private final PautaService pautaService = new PautaService();
     
     @Transactional
     public SessionDTO openSession(SessionDTO sessionDTO) {

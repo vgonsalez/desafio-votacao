@@ -1,34 +1,38 @@
 package com.voting.voting_api.service;
 
-import com.voting.voting_api.dto.VoteDTO;
-import com.voting.voting_api.model.Session;
-import com.voting.voting_api.model.Vote;
-import com.voting.voting_api.cliente.ValidacaoCliente;
-import com.voting.voting_api.cliente.ValidacaoCliente.ValidacaoCPFResultado;
-import com.voting.voting_api.cliente.ValidacaoCliente.PermissaoVoto;
-import com.voting.voting_api.repository.VoteRepository;
-import lombok.RequiredArgsConstructor;
+import java.time.LocalDateTime;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
+import com.voting.voting_api.cliente.ValidacaoCliente;
+import com.voting.voting_api.cliente.ValidacaoCliente.PermissaoVoto;
+import com.voting.voting_api.cliente.ValidacaoCliente.ValidacaoCPFResultado;
+import com.voting.voting_api.dto.VoteDTO;
+import com.voting.voting_api.exception.CpfInvalidoException;
+import com.voting.voting_api.exception.CpfSemVotoException;
+import com.voting.voting_api.model.Session;
+import com.voting.voting_api.model.Vote;
+import com.voting.voting_api.repository.VoteRepository;
+
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
 public class VoteService {
     
-    private final VoteRepository voteRepository;
-    private final SessionService sessionService;
-    private final ValidacaoCliente validacaoCliente;
+    private final VoteRepository voteRepository = null;
+    private final SessionService sessionService = new SessionService();
+    private final ValidacaoCliente validacaoCliente = new ValidacaoCliente();
     
     @Transactional
     public VoteDTO registerVote(VoteDTO voteDTO) {
         ValidacaoCPFResultado validacaoResult = validacaoCliente.validaCPF(voteDTO.getCpf());
-        if (validationResult == null) {
+        if (validacaoResult == null) {
             throw new CpfInvalidoException("CPF inválido");
         }
         
-        if (validationResult.getStatus() == VotePermission.UNABLE_TO_VOTE) {
+        if (validacaoResult.getStatus() == PermissaoVoto.VOTO_INVALIDO) {
             throw new CpfSemVotoException("CPF não habilitado para votar");
         }
 

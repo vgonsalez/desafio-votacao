@@ -65,6 +65,12 @@ public class ValidacaoCliente{
         public ValidacaoCPFResultado(PermissaoVoto status) {
         	this.status = status;
         }
+
+		public PermissaoVoto getStatus() {
+			return status;
+		}
+        
+        
     }
 
 }
